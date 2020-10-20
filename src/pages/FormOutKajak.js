@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
+import { Container, Button, Row, Col, Form } from 'react-bootstrap';
 
 class FormOutKajak extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class FormOutKajak extends React.Component {
 
    <Container>
         <Row>
-            <h1 className="mt-3">Kajak - Check-Out</h1>
+          <h1 className="mt-3">Kajak - Check-Out</h1>
         </Row>
         <Form>
         <Form.Group as={Col} controlId="formGridEmail">

@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container,  Row, Col, Form, Button } from 'react-bootstrap';
 
-export default function FormInKantine() {
-    const [voornaam, setVoornaam] = useState("");
-    const [achternaam, setAchternaam] = useState("");
+class FormInKantine extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = { 
+        extra_location_field: false,
+        extra_division_field: false,
+        voornaam: "",
+        achternaam: ""
+    };
+  }
 
-    function validateForm() {
-        return voornaam.length > 0 && achternaam.length > 0;
-    }
+  validateForm = () => {
+    return this.state.voornaam.length > 0 && this.state.achternaam.length > 0;
+  }
 
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Test Submit");
+  }
+
+  setVoornaam = (event) => {
+    this.setState({voornaam: event})
+  }
+
+  setAchternaam = (event) => {
+    this.setState({achternaam: event})
+  }
+
+  render() {
     return (
     <Container>
         <Row>
             <h1 className="mt-3">Kantine - Check-In</h1>
         </Row>
-        <Form>
+        <Form onSubmit={e=>this.handleSubmit(e)}>
             <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Voornaam</Form.Label>
                 <Form.Control
@@ -25,8 +43,8 @@ export default function FormInKantine() {
                     required
                     type="text" 
                     placeholder="Uw Voornaam"
-                    value={voornaam}
-                    onChange={e => setVoornaam(e.target.value)}
+                    value={this.state.voornaam}
+                    onChange={e => this.setVoornaam(e.target.value)}
                 />
             </Form.Group>   
 
@@ -37,15 +55,18 @@ export default function FormInKantine() {
                     required
                     type="text" 
                     placeholder="Uw Achternaam"
-                    value={achternaam}
-                    onChange={e => setAchternaam(e.target.value)}
+                    value={this.state.achternaam}
+                    onChange={e => this.setAchternaam(e.target.value)}
                 />
             </Form.Group>
-            <Button href="/kantine/checkin/submit" disabled={!validateForm()} variant="success" type="submit" block>
+            <Button href="/kantine/checkin/submit" disabled={!this.validateForm()} variant="success" type="submit" block>
                 Submit
         </Button>
         </Form>
         
     </Container>
     )
+  }
 }
+
+export default FormInKantine;

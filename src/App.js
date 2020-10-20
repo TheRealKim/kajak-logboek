@@ -1,21 +1,12 @@
 
-import React, {useState} from "react";
-import { AppContext } from "./libs/contextLib";
+import React from "react";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
 } from "react-router-dom";
 import Routes from "./Routes";
 import { Container, Navbar, Nav } from 'react-bootstrap';
 
 export default function App() {
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
-
-  function handleLogout() {
-  userHasAuthenticated(false);
-}
   return (
    <Router>
       <Container>

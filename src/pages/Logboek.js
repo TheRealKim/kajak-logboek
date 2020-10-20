@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row } from 'react-bootstrap';
-import { AppContext } from "../libs/contextLib";
 
 const Logboek = () => (
    <Container>

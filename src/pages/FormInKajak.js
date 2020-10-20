@@ -6,19 +6,20 @@ class FormInKajak extends React.Component {
     super(props);
     this.state = { 
         extra_location_field: false,
-        extra_division_field: false
-        voornaam: ""
+        extra_division_field: false,
+        voornaam: "",
         achternaam: ""
-    };
+      };
+    }
+
+  validateForm = () => {
+    return this.state.voornaam.length > 0 && this.state.achternaam.length > 0;
   }
 
-    function validateForm() {
-        return this.voornaam.length > 0 && this.achternaam.length > 0;
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Test Submit");
+  }
 
   ErgensAndersHandler = (event) => {
       if (this.state.extra_location_field) {
@@ -34,6 +35,14 @@ class FormInKajak extends React.Component {
       } else {
           this.setState({extra_division_field: true});
       }       
+  }
+
+  setVoornaam = (event) => {
+    this.setState({voornaam: event})
+  }
+
+  setAchternaam = (event) => {
+    this.setState({achternaam: event})
   }
 
   render() {
@@ -68,13 +77,27 @@ class FormInKajak extends React.Component {
         <Form>
         <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Voornaam</Form.Label>
-            <Form.Control required type="text" placeholder="Uw Voornaam"/>
+            <Form.Control
+              autoFocus
+              required 
+              type="text" 
+              placeholder="Uw Voornaam"
+              value={this.state.voornaam}
+              onChange={e => this.setVoornaam(e.target.value)}
+            />
         </Form.Group>
 
 
         <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label >Achternaam</Form.Label>
-            <Form.Control required type="text" placeholder="Uw Achternaam" />
+            <Form.Control
+              autoFocus
+              required 
+              type="text" 
+              placeholder="Uw Achternaam"
+              value={this.state.achternaam}
+              onChange={e => this.setAchternaam(e.target.value)}
+            />
         </Form.Group>
 
     <Form.Group as={Col}>
@@ -167,7 +190,7 @@ class FormInKajak extends React.Component {
     
     {division_field}
 
-    <Button href="/kajak/checkin/submit" variant="success" type="submit" block>
+    <Button href="/kajak/checkin/submit" disabled={!this.validateForm()} variant="success" type="submit" block onSubmit={e => this.handleSubmit(e)}>
         Submit
     </Button>
         </Form>
